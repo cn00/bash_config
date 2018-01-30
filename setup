@@ -1,0 +1,66 @@
+#!/bin/bash
+
+set -xe
+
+sed="sed"
+
+bash_path="$(cd dirname $0;pwd)"
+
+bash_rc="${bash_path}/../.bash_profile"
+gitconfig="${bash_path}/../.gitconfig"
+vimrc="${bash_path}/../.vimrc"
+
+function Install()
+{
+	echo "source ${bash_path}/psword_cn" >> "${bash_rc}"
+	echo "source ${bash_path}/export_cn" >> "${bash_rc}"
+	echo "source ${bash_path}/alias_cn" >> "${bash_rc}"
+
+	# git config
+	if [[ -f "${gitconfig}" ]];then
+		mv "${gitconfig}" "${gitconfig}.bak"
+	fi
+	ln "${bash_path}/gitconfig" "${gitconfig}"
+
+	# vimrc
+	if [[ -f "${vimrc}" ]];then
+		mv "${vimrc}" "${vimrc}.bak"
+	fi
+	ln "${bash_path}/vimrc" "${vimrc}"
+
+	source "${bash_rc}"
+}
+
+function UnInstall()
+{
+	# bash_rc
+	${sed} -e '/psword_cn/d' -i "${bash_rc}"
+	${sed} -e '/alias_cn/d' -i "${bash_rc}"
+	${sed} -e '/export_cn/d' -i "${bash_rc}"
+
+	# git config
+	if [[ -f "${gitconfig}.bak" ]];then
+		mv "${gitconfig}.bak" "${gitconfig}"
+	fi
+
+	# vimrc
+	if [[ -f "${vimrc}.bak" ]];then
+		mv "${vimrc}.bak" "${vimrc}"
+	fi
+}
+
+############ main ############
+
+if [[ ! "${#@}" = "1" ]];then
+	echo "usage ./setup [iu]
+	i 		Install
+	u 		UnInstall
+"
+	exit -1
+fi
+
+if [[ ${1} = "i" ]];then
+	Install
+elif [[ ${1} = "u" ]]; then
+	UnInstall
+fi

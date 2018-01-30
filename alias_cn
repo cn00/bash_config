@@ -1,0 +1,37 @@
+
+alias ls='ls -G -p'
+alias ll='ls -l -G -p'
+# alias ldd='otool -L'
+# alias rm='trash -av'
+
+alias docker="winpty docker"
+alias dk="winpty docker"
+
+alias grep='grep --exclude-dir=.svn --exclude-dir=.git --color=always'
+alias egrep='egrep --color'
+alias fgrep='fgrep --color'
+alias aloss='aliyuncli oss'
+alias alrds='aliyuncli rds'
+alias rg='rg --path-separator=/'
+
+alias transz='trans -t zh'
+
+alias adbi='adb install -r'
+
+alias dl="cd /cygdrive/d/Downloads"
+alias ws="cd /cygdrive/d/a3"
+alias p="cd - &>/dev/null"
+alias .="cd .."
+alias ..="cd ../.."
+alias ...="cd ../../.."
+alias ....="cd ../../../.."
+alias .....="cd ../../../../.."
+
+alias g="git"
+alias gg="git gg"
+alias gsvn='git svn'
+
+alias mac="ssh mac"
+alias a3="ssh a3"
+
+ws

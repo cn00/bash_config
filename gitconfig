@@ -1,0 +1,44 @@
+[user]
+	email = cool_navy@126.com
+	name = cn
+[merge]
+	tool = vimdiff
+[mergetool]
+	prompt = false
+[core]
+    	#autocrlf=false
+    	#autocrlf=true
+	excludesfile = 
+	autocrlf = false
+	quotepath = false
+[alias]
+	br = branch
+	ci = commit -m
+	co = checkout
+	cp = cherry-pick
+	cpa = cherry-pick --aboart
+	cpc = cherry-pick --continue
+	dp = stash drop
+	df = diff -w
+	dfc = diff --cached
+	drop = stash drop
+	gg = "log --format=\"%h: %ar | %cn | %s \""
+	glog = "log --format=\"%h: %ar | %cn | %s | %b\""
+	gsdc = "git svn dcommit"
+	pop = stash pop
+	rbc = rebase --continue
+	st = status
+	stn = status -uno
+	stl= "stash list"
+	sn = show --name-status
+	up = "!git remote update -p; git merge --ff-only @{u}"
+
+[push]
+	default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =  
+[mergetool "sourcetree"]
+	trustExitCode = true
+[diff]
+	renameLimit=10240

@@ -1,0 +1,20 @@
+uname=$(uname)
+uname=${uname:0:6}
+if [[ ${uname} == "Darwin" ]];then
+	IP=$(ifconfig | grep -e "netmask 0xffff" | awk -F ' ' '{print $2}' | sed '2,$d')
+	# export LSCOLORS=Cxfxcxdxbxegedabagacad
+	export LSCOLORS=Cxfxcxdxbxegegxbxgxcad
+elif [[ ${uname} == "Linux" ]];then
+	IP=$(ifconfig | grep -e "Mask:255\.255" | awk -F ' ' '{print $2}' |cut -d: -f2)
+elif [[ ${uname} == "CYGWIN" ]];then
+    IP="$(ipconfig 2>&1 | iconv -f gb2312 -t utf8 | grep IPv4 | sed -e "s/\s//g" | awk -F '[:]+' '{print $2}')"
+fi
+export PS1="\# \t \[\e[0;36m\]\h \[\e[0;31m\]\u@${IP}\[\e[0;33m\]:\[\e[1;34m\]\w \[\e[1;37m\]\n\$ \[\e[m\]"
+
+#export LANG=zh_CN.UTF-8
+
+## for sed
+#export LC_COLLATE='C'
+# export LC_CTYPE='C'
+
+export EDITOR=vim
