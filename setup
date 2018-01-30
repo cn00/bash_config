@@ -4,29 +4,29 @@ set -xe
 
 sed="sed"
 
-bash_path="$(cd dirname $0;pwd)"
+this_path="$(cd dirname $0;pwd)"
 
-bash_rc="${bash_path}/../.bash_profile"
-gitconfig="${bash_path}/../.gitconfig"
-vimrc="${bash_path}/../.vimrc"
+bash_rc="${this_path}/../.bash_profile"
+gitconfig="${this_path}/../.gitconfig"
+vimrc="${this_path}/../.vimrc"
 
 function Install()
 {
-	echo "source ${bash_path}/psword_cn" >> "${bash_rc}"
-	echo "source ${bash_path}/export_cn" >> "${bash_rc}"
-	echo "source ${bash_path}/alias_cn" >> "${bash_rc}"
+	echo "source ${this_path}/psword_cn" >> "${bash_rc}"
+	echo "source ${this_path}/export_cn" >> "${bash_rc}"
+	echo "source ${this_path}/alias_cn" >> "${bash_rc}"
 
 	# git config
 	if [[ -f "${gitconfig}" ]];then
 		mv "${gitconfig}" "${gitconfig}.bak"
 	fi
-	ln "${bash_path}/gitconfig" "${gitconfig}"
+	ln "${this_path}/gitconfig" "${gitconfig}"
 
 	# vimrc
 	if [[ -f "${vimrc}" ]];then
 		mv "${vimrc}" "${vimrc}.bak"
 	fi
-	ln "${bash_path}/vimrc" "${vimrc}"
+	ln "${this_path}/vimrc" "${vimrc}"
 
 	source "${bash_rc}"
 }
