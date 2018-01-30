@@ -10,6 +10,13 @@ bash_rc="${this_path}/../.bash_profile"
 gitconfig="${this_path}/../.gitconfig"
 vimrc="${this_path}/../.vimrc"
 
+function Usage()
+{
+	echo "usage ./setup [iu]
+	i 		Install
+	u 		UnInstall
+"
+}
 function Install()
 {
 	echo "source ${this_path}/psword_cn" >> "${bash_rc}"
@@ -52,10 +59,7 @@ function UnInstall()
 ############ main ############
 
 if [[ ! "${#@}" = "1" ]];then
-	echo "usage ./setup [iu]
-	i 		Install
-	u 		UnInstall
-"
+    Usage
 	exit -1
 fi
 
@@ -63,4 +67,7 @@ if [[ ${1} = "i" ]];then
 	Install
 elif [[ ${1} = "u" ]]; then
 	UnInstall
+else
+    Usage
+    exit -1
 fi
